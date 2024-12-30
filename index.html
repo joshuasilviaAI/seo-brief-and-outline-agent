@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Agent</title>
+    <script>
+        async function callAgent() {
+            const keyword = document.getElementById('keyword').value;
+            const response = await fetch('curl -X POST "https://cloud.integrail.ai/api/g9QCNav9xztB58aSx/agent/GKypqATW5KpWu7EWW/execute" \
+ -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiJnOVFDTmF2OXh6dEI1OGFTeCIsImlhdCI6MTczNTU4NzY2NX0.TWOuePJkRO2NfJALxDC_Bx8n2VEWxxHW3LtHSiKqGw0" \
+ -H "Content-Type: application/json" -d \
+ '{
+  "inputs": {
+    "userPrompt": "Please enter the target keyword for your content. After that, if you have a file to upload, you can upload it in the next step.",
+    "file": ""
+  }
+}'', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ userPrompt: keyword })
+            });
+            const result = await response.json();
+            document.getElementById('output').innerText = JSON.stringify(result, null, 2);
+        }
+    </script>
+</head>
+<body>
+    <h1>Interact with My Agent</h1>
+    <label for="keyword">Enter a Keyword:</label>
+    <input type="text" id="keyword" />
+    <button onclick="callAgent()">Submit</button>
+    <pre id="output"></pre>
+</body>
+</html>
